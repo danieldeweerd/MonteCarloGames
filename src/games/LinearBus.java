@@ -4,30 +4,32 @@ import cardgamelib.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-public class Bus extends Game {
+public class LinearBus extends DrinkingGame {
 	CardStack stack = new CardStack();
 	List<Card> cardsOnTable = new ArrayList<Card>();
-	int length;
-	int numberClosed;
+	int numberOfCardsOnTable;
+	int numberOfClosedCards;
 	int counter = 0;
-	Random r = new Random();
 
-	public Bus(int length, int numberClosed) {
-		this.length = length;
-		this.numberClosed = numberClosed;
+	public LinearBus(int numberOfCardsOnTable, int numberOfClosedCards) {
+		this.numberOfCardsOnTable = numberOfCardsOnTable;
+		this.numberOfClosedCards = numberOfClosedCards;
 
-		for (int i = 0; i < length; i++)
+		for (int i = 0; i < numberOfCardsOnTable; i++)
 			cardsOnTable.add(stack.draw());
-		for (int j = 0; j < numberClosed; j++)
+		for (int j = 0; j < numberOfClosedCards; j++)
 			cardsOnTable.get(j).setClosed(true);
+	}
+
+	@Override
+	public String getName() {
+		return "Bussen";
 	}
 
 	public int run() {
 		int slokken = 0;
-		while (counter != length) {
-			//System.out.println(counter);
+		while (counter != numberOfCardsOnTable) {
 			Card c1 = cardsOnTable.get(counter);
 			Card c2 = stack.draw();
 			if (c1.isClosed()) {
@@ -59,8 +61,5 @@ public class Bus extends Game {
 		return slokken;
 	}
 
-	@Override
-	public String getName() {
-		return "Bussen";
-	}
+
 }

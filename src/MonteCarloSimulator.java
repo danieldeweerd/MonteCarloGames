@@ -1,43 +1,34 @@
-import cardgamelib.Game;
-import games.Bus;
+import cardgamelib.DrinkingGame;
+import games.LinearBus;
 
 public class MonteCarloSimulator {
 
-    private static final int TEST_FREQ = 20000;
+    private static final int NUMBER_OF_TEST_RUNS = 20000;           // Number of times to simulate the game
 
-    public static int test(Game game, boolean displayProgress) {
-        int sum = 0;
+    /**
+     * Simulate a drinking game a large amount of times to get
+     * the average amount of taken sips
+     *
+     * @param drinkingGame
+     * @return sips
+     */
 
-        if (displayProgress) {
-
-            int numStripes = TEST_FREQ / 500;
-            for (int i = 0; i < numStripes; i++) {
-                System.out.print('-');
-            }
+    public static int simulate(DrinkingGame drinkingGame) {
+        int totalAmountOfSips = 0;
+        for (int i = 0; i < NUMBER_OF_TEST_RUNS; i++) {
+            int slokken = drinkingGame.run();
+            totalAmountOfSips += slokken;
         }
-
-        int j = 0;
-        for (int i = 0; i < TEST_FREQ; i++) {
-            int slokken = game.run();
-            sum = sum + slokken;
-
-            j++;
-            if (j == 500 && displayProgress) {
-                System.out.print('-');
-                j = 0;
-            }
-        }
-        return sum / TEST_FREQ;
+        return totalAmountOfSips / NUMBER_OF_TEST_RUNS;
     }
 
     public static void main(String[] args) {
-        for (int k = 1; k <= 8; k++) {
-            for (int i = 0; i <= 8; i++) {
-                int slokkenGemiddeld = test(new Bus(k, Math.min(k, i)), false);
-                System.out.println(k + " KAARTEN WAARVAN " + Math.min(k, i) + " DICHT: " + slokkenGemiddeld);
-            }
-        }
+        int numberOfClosedCards = 3;
+        int numberOfCardsOnTable = 8;
+        DrinkingGame bus = new LinearBus(numberOfCardsOnTable, numberOfClosedCards);
+        int slokkenGemiddeld = simulate(bus);
+        System.out.println(numberOfCardsOnTable + " KAARTEN WAARVAN "
+                + numberOfClosedCards + " DICHT: " + slokkenGemiddeld);
 
     }
-
 }
