@@ -33,7 +33,7 @@ public class Tester {
 		{
 			for (int i = 0; i <= 8; i++) {
 				int slokkenGemiddeld = test(new Bus(k, Math.min(k, i)), false);
-				System.out.println(k+" KAARTEN WAARVAN " + Math.min(k, i) + " DICHT: " + slokkenGemiddeld);
+				System.out.println(k + " KAARTEN WAARVAN " + Math.min(k, i) + " DICHT: " + slokkenGemiddeld);
 			}
 		}
 
