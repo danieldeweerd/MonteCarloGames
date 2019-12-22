@@ -1,40 +1,42 @@
 package games;
 
-import cardgamelib.*;
-
-import java.util.ArrayList;
-import java.util.List;
+import cardgamelib.DrinkingGame;
 
 /**
- * INCOMPLETE
+ * Wrapper for different games that are often combined
  */
 public class PyramidBus extends DrinkingGame {
 
-    List<Card> eersteTrap = new ArrayList<Card>();
-    List<Card> tweedeTrap = new ArrayList<Card>();
-    List<Card> derdeTrap = new ArrayList<Card>();
-    List<Card> vierdeTrap = new ArrayList<Card>();
+    int firstStageLength = 4;
+    int secondStageLength = 3;
+    private int sips = 0;
+    boolean checkPointsEnabled;
 
-    CardStack stack = new CardStack();
-
-    public int run() {
-        for (int i = 0; i < 4; i++)
-            vierdeTrap.add(stack.draw());
-        for (int i = 0; i < 3; i++)
-            derdeTrap.add(stack.draw());
-        for (int i = 0; i < 2; i++)
-            tweedeTrap.add(stack.draw());
-        eersteTrap.add(stack.draw());
-
-        int counter = 0;
-        while (counter != vierdeTrap.size())
-        {
-            CardGuesser.randomColor();
-        }
-        return 0;
+    public PyramidBus(boolean checkpointsEnabled) {
+        this.checkPointsEnabled = checkpointsEnabled;
     }
 
+    @Override
+    public void run() {
+        sips = 0;
+        RedOrBlack firstStage = new RedOrBlack(firstStageLength);
+        firstStage.run();
+        sips += firstStage.getSips();
+
+        HigherLower secondStage = new HigherLower(secondStageLength, 0);
+        secondStage.run();
+        sips += secondStage.getSips();
+    }
+
+    @Override
+    public int getSips() {
+        return sips;
+    }
+
+    @Override
     public String getName() {
-        return "Pyramidebus";
+        return "";
     }
+
+
 }

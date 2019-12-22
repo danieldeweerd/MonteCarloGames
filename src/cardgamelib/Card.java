@@ -9,11 +9,11 @@ public class Card {
 
     private final Type type;
     private final int value;
-    private boolean closed = false;                //	Whether the card's type and value can be seen by the player
+    private boolean closed = false;                     //	Whether the card's type and value can be seen by the player
 
     public Card(Type type, int number) {
         if (number > 14) {
-            throw new IllegalArgumentException();    // 	No cards allowed with a value bigger than 14
+            throw new IllegalArgumentException();       // 	No cards allowed with a value bigger than 14
         }
         this.type = type;
         this.value = number;
@@ -32,6 +32,21 @@ public class Card {
         else return Comparison.SAME;
     }
 
+    /**
+     * Check whether this card is in between two given other cards
+     *
+     * @param c1 first card
+     * @param c2 second card
+     * @return Inside or outside
+     */
+    public boolean isInside(Card c1, Card c2) {
+        int value1 = c1.getValue();
+        int value2 = c2.getValue();
+        int max = Math.max(value1, value2);
+        int min = Math.min(value1, value2);
+        return (this.value > min && this.value < max);
+    }
+
     public String toString() {
         return type + " " + value;
     }
@@ -40,19 +55,23 @@ public class Card {
         return value;
     }
 
+    /**
+     * Indicate whether the card value and type are visible to the player
+     *
+     * @param closed - whether the card is visible or not
+     */
     public void setClosed(boolean closed) {
         this.closed = closed;
     }
 
-    public Color getColor()
-	{
-		if (type == Type.CLUBS || type == Type.SPADES)
-			return Color.BLACK;
-		else
-			return Color.RED;
-	}
-
     public boolean isClosed() {
         return closed;
+    }
+
+    public Color getColor() {
+        if (type == Type.CLUBS || type == Type.SPADES)
+            return Color.BLACK;
+        else
+            return Color.RED;
     }
 }

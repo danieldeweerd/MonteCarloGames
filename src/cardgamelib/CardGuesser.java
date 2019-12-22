@@ -1,9 +1,5 @@
 package cardgamelib;
 
-import cardgamelib.Card;
-import cardgamelib.Comparison;
-
-import java.security.SecureRandom;
 import java.util.Random;
 
 /**
@@ -42,7 +38,12 @@ public class CardGuesser {
             return Comparison.LESSER;
     }
 
-    public static Color randomColor(){
+    /**
+     * Get a random color
+     *
+     * @return random color
+     */
+    public static Color randomColor() {
         int x = RANDOM.nextInt(2);
         if (x == 0)
             return Color.BLACK;

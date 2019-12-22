@@ -8,22 +8,28 @@ import java.util.Stack;
  */
 
 public class CardStack {
-    private Stack<Card> stack = new Stack<Card>();
+    private Stack<Card> stack = new Stack<>();
 
     public CardStack() {
         addCards();
     }
 
     /**
-     * Draw a card from the card stack
+     * Draw an open card from the card stack
      *
      * @return a randomly drawn card
      */
-    public Card draw() {
+    public Card drawOpen() {
         Card ret = stack.pop();
         if (stack.size() == 0)            //	Create a new full card stack if the stack is empty
             addCards();
         return ret;
+    }
+
+    public Card drawClosed() {
+        Card card = drawOpen();
+        card.setClosed(true);
+        return card;
     }
 
     /**

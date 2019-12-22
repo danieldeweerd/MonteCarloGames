@@ -8,9 +8,18 @@ package cardgamelib;
 public abstract class DrinkingGame {
 
 	/**
+	 * Play the game once
+	 */
+	public abstract void run();
+
+	/**
 	 * @return The amount of sips that should have been taken while playing the game
 	 */
-	public abstract int run();
+	public abstract int getSips();
 
+	/**
+	 * @return the name of the game
+	 */
 	public abstract String getName();
+
 }
