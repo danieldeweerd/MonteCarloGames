@@ -9,16 +9,17 @@ import java.util.List;
  * Subclass of DrinkingGame that simulates bussen
  */
 public class LinearBus extends DrinkingGame {
-    CardStack stack  = new CardStack();
+    CardStack stack = new CardStack();
     List<Card> cardsOnTable = new ArrayList<Card>();    //	Represents cards on the table
     int numberOfCardsOnTable;
+    int closedCards;
     int counter = 0;
+    public long usedCards;
 
-    public LinearBus(int numberOfCardsOnTable) {
+    public LinearBus(int numberOfCardsOnTable, int closedCards) {
         this.numberOfCardsOnTable = numberOfCardsOnTable;
-
-        for (int i = 0; i < numberOfCardsOnTable; i++)
-            cardsOnTable.add(stack.draw());                        // Lay down initial set of cards
+        this.closedCards = closedCards;
+        usedCards = numberOfCardsOnTable;
     }
 
     @Override
@@ -27,36 +28,31 @@ public class LinearBus extends DrinkingGame {
     }
 
     public int run() {
-        stack = new CardStack();
-        int slokken = 0;
+        int swigs = 0;
         counter = 0;
+
+        for (int i = 0; i < numberOfCardsOnTable; i++)                  // Lay down starting cards on table
+            cardsOnTable.add(stack.draw());
+
+        for (int i = 0; i < closedCards; i++)
+            cardsOnTable.get(i).setClosed(true);
+
         while (counter != numberOfCardsOnTable) {                       // While the end of the bus hasn't been reached...
-            Card c1 = cardsOnTable.get(counter);                        // Get the c
-            Card c2 = stack.draw();
+            Card c1 = cardsOnTable.get(counter);                        // Get the card that is on the table
+            Card c2 = stack.draw();                                     // Draw a card
+            usedCards++;
 
+            Comparison pred = CardGuesser.predictOtherCard(c1);         // Predict whether c2 is greater or lesser than c2
+            Comparison res = c2.compare(c1);                            // Check this
+            cardsOnTable.set(counter, c2);                              // Put c2 on the table in the place of c1
 
-            Comparison pred = CardGuesser.predictOtherCard(c1);
-            Comparison res = c2.compare(c1);
-
-//            System.out.println("--------------");
-//            System.out.println("Card on table " + c1);
-//            System.out.println("Prediction: " + pred);
-//            System.out.println("Drawn card: " + c2.toString());
-            boolean js = pred == res;
-//            System.out.println("Result: " + js);
-
-            if (res == pred) {
+            if (res == pred) {                                          // Advance one card if correct
                 counter++;
-//                System.out.println("Verder");
             } else {
-                counter = 0;
-//                System.out.println("SLOK!");
-                slokken++;
+                counter = 0;                                            // Reset and take a swig if incorrect
+                swigs++;
             }
-
         }
-        return slokken;
+        return swigs;
     }
-
-
 }

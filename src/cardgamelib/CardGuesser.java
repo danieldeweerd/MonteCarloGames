@@ -3,6 +3,7 @@ package cardgamelib;
 import cardgamelib.Card;
 import cardgamelib.Comparison;
 
+import java.security.SecureRandom;
 import java.util.Random;
 
 /**
@@ -16,7 +17,7 @@ public class CardGuesser {
     /**
      * Input a card and guess whether another card is greater or smaller
      *
-     * @param card
+     * @param card to base prediction on
      * @return a reasonable guess whether another cardcard will be greater or smaller than the given card
      */
     public static Comparison predictOtherCard(Card card) {
@@ -31,7 +32,7 @@ public class CardGuesser {
     /**
      * Get a random guess
      *
-     * @return
+     * @return GREATER or LESSER comparison at random
      */
     public static Comparison randomComp() {
         int x = RANDOM.nextInt(2);
@@ -39,5 +40,13 @@ public class CardGuesser {
             return Comparison.GREATER;
         else
             return Comparison.LESSER;
+    }
+
+    public static Color randomColor(){
+        int x = RANDOM.nextInt(2);
+        if (x == 0)
+            return Color.BLACK;
+        else
+            return Color.RED;
     }
 }
