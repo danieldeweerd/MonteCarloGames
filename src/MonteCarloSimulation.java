@@ -1,4 +1,4 @@
-import cardgamelib.DrinkingGame;
+import games.DrinkingGame;
 
 import java.util.ArrayList;
 import java.util.Collections;

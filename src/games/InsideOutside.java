@@ -1,7 +1,5 @@
 package games;
 
-import cardgamelib.DrinkingGame;
-
 /**
  * Game where the player has to guess whether a card will be inside or outside two
  * given cards for n cards in a row

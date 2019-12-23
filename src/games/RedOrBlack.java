@@ -3,7 +3,6 @@ package games;
 import cardgamelib.CardGuesser;
 import cardgamelib.CardStack;
 import cardgamelib.Color;
-import cardgamelib.DrinkingGame;
 
 /**
  * Game where the player has to guess whether the next drawn card will be red or black

@@ -1,4 +1,4 @@
-package cardgamelib;
+package games;
 
 /**
  * Abstract class for the Monte Carlo Simulator to use

@@ -1,7 +1,5 @@
 package games;
 
-import cardgamelib.DrinkingGame;
-
 /**
  * Wrapper for different games that are often combined
  */

@@ -1,4 +1,4 @@
-import cardgamelib.DrinkingGame;
+import games.DrinkingGame;
 import games.HigherLower;
 import org.knowm.xchart.*;
 import org.knowm.xchart.style.Styler;
@@ -6,7 +6,8 @@ import org.knowm.xchart.style.Styler;
 public class Main {
 
     public Main() {
-        showProbabilityDistribution(new HigherLower(8, 8));
+        showProbabilityDistribution(new HigherLower(16, 0));
+        //drawRelationBetweenCardsAndSips(, false);
     }
 
     public static void main(String[] args) {
