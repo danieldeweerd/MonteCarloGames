@@ -7,9 +7,10 @@ import org.knowm.xchart.style.Styler;
 public class Main {
 
     public Main() {
-        showProbabilityDistribution(new HigherLower(8, 8, true));
-        showProbabilityDistribution(new CombinedBus(8, 6, 4, 2));
-        drawRelationBetweenCardsAndSipsInHigherLower(12, false);
+//        showProbabilityDistribution(new HigherLower(8, 8, true));
+        drawRelationBetweenCardsAndSipsInHigherLower(10, true);
+        drawRelationBetweenCardsAndSipsInHigherLower(15, true);
+        drawRelationBetweenCardsAndSipsInHigherLower(20, true);
     }
 
     public static void main(String[] args) {
@@ -30,8 +31,10 @@ public class Main {
         System.out.println("MEDIAN: " + sim.getMedian());
         System.out.println("MODE: " + sim.getMode());
 
-        drawHistogram(sim.trimmedRelativeFrequencies, "Aantal slokken per spel - " + game.getName(), "Frequentie", "trimmedRelative", false);
-        drawHistogram(sim.cumulativeDistribution, "Maximaal aantal slokken per spel - " + game.getName(), "Kans", "cumulative", false);
+        String title = "Frequentie van het aantal slokken per spel - " + game.getName();
+        drawHistogram(sim.trimmedRelativeFrequencies, title, "Frequentie", "Results/" + title, true);
+        title = "Cumulatieve verdeling van het aantal slokken per spel - " + game.getName();
+        drawHistogram(sim.cumulativeDistribution, title, "Kans", "Results/" + title, true);
 
     }
 
@@ -56,7 +59,7 @@ public class Main {
         double[] results = new double[values.length];
         for (int i = 0; i < values.length; i++) {
             int cards = (int) values[i];
-            HigherLower bus = new HigherLower(cards, cards, false);
+            HigherLower bus = new HigherLower(cards, cards, true);
             MonteCarloSimulation sim = new MonteCarloSimulation(bus, 10000);
             sim.run();
             results[i] = sim.getMean();
@@ -78,7 +81,7 @@ public class Main {
          */
 
         try {
-            BitmapEncoder.saveBitmapWithDPI(chart, "Kaarten-slokken", BitmapEncoder.BitmapFormat.PNG, 300);
+            BitmapEncoder.saveBitmapWithDPI(chart, "Results/Verband tussen aantal kaarten en aantal slokken tot " + max + " kaarten", BitmapEncoder.BitmapFormat.PNG, 300);
         } catch (Exception ignore) {
         }
 
