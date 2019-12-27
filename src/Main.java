@@ -4,12 +4,11 @@ import games.CombinedBus;
 import org.knowm.xchart.*;
 import org.knowm.xchart.style.Styler;
 
+import java.io.FileWriter;
+
 public class Main {
 
     public Main() {
-//        showProbabilityDistribution(new HigherLower(8, 8, true));
-        drawRelationBetweenCardsAndSipsInHigherLower(10, true);
-        drawRelationBetweenCardsAndSipsInHigherLower(15, true);
         drawRelationBetweenCardsAndSipsInHigherLower(20, true);
     }
 
@@ -117,6 +116,4 @@ public class Main {
         } catch (Exception ignored) {
         }
     }
-
-
 }

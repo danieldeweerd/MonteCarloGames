@@ -1,0 +1,6 @@
+Verband tussen aantal kaarten in de bus (x) en gemiddeld aantal te nemen slokken:
+y = 0.60291 * 1.43712^x      ALLE KAARTEN OPEN
+y = 0,98234 * 1.43712^x      ALLE KAARTEN DICHT
+
+Simpele versie: y = 0.6 * 1.44^x
+
