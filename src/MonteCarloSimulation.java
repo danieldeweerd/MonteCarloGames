@@ -10,7 +10,7 @@ import java.util.Collections;
 
 public class MonteCarloSimulation {
 
-    private final int numberOfSamples = 20000;                            // Number of times to simulate the game
+    private final int numberOfSamples;                            // Number of times to simulate the game
 
     private final DrinkingGame game;
     private java.util.List<Integer> sipsData = new ArrayList<Integer>();        // Store the amount of times the player has to drink, for every game
@@ -23,8 +23,9 @@ public class MonteCarloSimulation {
     private int median = 0;
     private int mode = 0;
 
-    public MonteCarloSimulation(DrinkingGame game) {
+    public MonteCarloSimulation(DrinkingGame game, int numberOfSamples) {
         this.game = game;
+        this.numberOfSamples = numberOfSamples;
     }
 
     public int getMean() {

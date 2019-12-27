@@ -41,6 +41,11 @@ public class RedOrBlack extends DrinkingGame {
     }
 
     @Override
+    public int getNumberOfCards() {
+        return stack.getNumberOfCardsDrawn();
+    }
+
+    @Override
     public String getName() {
         return "Rood of zwart: " + numberOfCards + " kaarten";
     }

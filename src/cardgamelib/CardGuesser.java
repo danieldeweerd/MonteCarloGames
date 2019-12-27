@@ -50,4 +50,8 @@ public class CardGuesser {
         else
             return Color.RED;
     }
+
+    public static boolean random() {
+        return RANDOM.nextBoolean();
+    }
 }

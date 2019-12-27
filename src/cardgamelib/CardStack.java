@@ -9,6 +9,7 @@ import java.util.Stack;
 
 public class CardStack {
     private Stack<Card> stack = new Stack<>();
+    private int numberOfCardsDrawn = 0;
 
     public CardStack() {
         addCards();
@@ -23,6 +24,7 @@ public class CardStack {
         Card ret = stack.pop();
         if (stack.size() == 0)            //	Create a new full card stack if the stack is empty
             addCards();
+        numberOfCardsDrawn ++;
         return ret;
     }
 
@@ -43,5 +45,9 @@ public class CardStack {
             stack.add(new Card(Type.CLUBS, i));
         }
         Collections.shuffle(stack);
+    }
+
+    public int getNumberOfCardsDrawn() {
+        return numberOfCardsDrawn;
     }
 }

@@ -14,16 +14,19 @@ public class HigherLower extends DrinkingGame {
     private int closedCards;
     private int counter = 0;
     private int sips = 0;
+    private boolean intelligentGuessing;
 
-    CardStack stack = new CardStack();
     List<Card> cardsOnTable = new ArrayList<Card>();    //	Represents cards on the table
+    CardStack stack = null;
 
-    public HigherLower(int numberOfCardsOnTable, int closedCards) {
+    public HigherLower(int numberOfCardsOnTable, int closedCards, boolean intelligentGuessing) {
         this.numberOfCardsOnTable = numberOfCardsOnTable;
         this.closedCards = closedCards;
+        this.intelligentGuessing = intelligentGuessing;
     }
 
     public void run() {
+        stack = new CardStack();
         int sips = 0;
         counter = 0;
 
@@ -40,6 +43,8 @@ public class HigherLower extends DrinkingGame {
             Comparison pred = CardGuesser.predictOtherCard(c1);         // Predict whether c2 is greater or lesser than c2
             Comparison res = c2.compare(c1);                            // Check this
             cardsOnTable.set(counter, c2);                              // Put c2 on the table in the place of c1
+            if (! intelligentGuessing)
+                c2.setClosed(true);
 
             if (res == pred) {                                          // Advance one card if correct
                 counter++;
@@ -59,5 +64,10 @@ public class HigherLower extends DrinkingGame {
     @Override
     public int getSips() {
         return sips;
+    }
+
+    @Override
+    public int getNumberOfCards() {
+        return stack.getNumberOfCardsDrawn();
     }
 }
